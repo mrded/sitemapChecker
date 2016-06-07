@@ -1,39 +1,37 @@
-var fs = require('fs');
-var xml2js = require('xml2js');
-var webshot = require('webshot');
-var progressBar = require('progress');
+var FS = require('fs');
+var Xml2js = require('xml2js');
+var Webshot = require('webshot');
+var ProgressBar = require('progress');
+const Url = require('url');
 
-var base_url = 'http://example.com';
-
-var _save = function(paths, progress) {
-  if (paths.length > 0) {
-    var path = paths.shift();
-    var url = base_url + path + '?_escaped_fragment_=';
+var _save = function(urls, progress) {
+  if (urls.length > 0) {
+    var url = urls.shift();
+    var path = Url.parse(url).path;
     
     progress.tick({path: path});
     
     var options = {
-      renderDelay: 1000,
       windowSize: { width: 1200},
       shotSize: { width: 'all', height: 'all' }  
     }
     
-    webshot(url, 'screenshots' + path + '.png', options, function(err) {
+    Webshot(url + '?_escaped_fragment_=', 'screenshots' + path + '.png', options, function(err) {
       if (err) console.error('(!) Cannot load url', path);
-      _save(paths, progress);
+      _save(urls, progress);
     });
   }
 }
 
-fs.readFile(__dirname + '/sitemap.xml', function(err, data) {
-  var parser = new xml2js.Parser();
+FS.readFile(__dirname + '/sitemap.xml', function(err, data) {
+  var parser = new Xml2js.Parser();
   parser.parseString(data, function (err, result) {
-    var paths = result.urlset.url.map(function(item) {
-      return item.loc[0].replace(base_url, '');
+    var urls = result.urlset.url.map(function(item) {
+      return item.loc[0];
     });
     
-    var progress = new progressBar('[:bar] :percent :current: :path ', {total: paths.length, width: 20});
+    var progress = new ProgressBar('[:bar] :percent :current: :path ', {total: urls.length, width: 20});
     
-    _save(paths, progress);
+    _save(urls, progress);
   });
 });
