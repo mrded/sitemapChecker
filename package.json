@@ -9,6 +9,7 @@
   "author": "Dmitry Demenchuk (dmitry@demenchuk.me)",
   "license": "ISC",
   "devDependencies": {
-    "webshot": "^0.18.0"
+    "webshot": "^0.18.0",
+    "xml2js": "^0.4.16"
   }
 }

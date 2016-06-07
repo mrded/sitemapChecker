@@ -1,4 +1,5 @@
 .vscode
 node_modules
 screenshots/*
+npm-debug.log
 sitemap.xml
