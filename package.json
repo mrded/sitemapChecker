@@ -1,0 +1,14 @@
+{
+  "name": "sitemap-checker",
+  "version": "1.0.0",
+  "description": "Small script which downloads every page from sitemap.xml as a screenshot.",
+  "main": "sitemapChecker.js",
+  "scripts": {
+    "start": "node sitemapChecker.js"
+  },
+  "author": "Dmitry Demenchuk (dmitry@demenchuk.me)",
+  "license": "ISC",
+  "devDependencies": {
+    "webshot": "^0.18.0"
+  }
+}
