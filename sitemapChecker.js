@@ -4,6 +4,8 @@ var Webshot = require('webshot');
 var ProgressBar = require('progress');
 const Url = require('url');
 
+var skip = process.argv[2] || 0;
+
 var _save = function(urls, progress) {
   if (urls.length > 0) {
     var url = urls.shift();
@@ -16,10 +18,16 @@ var _save = function(urls, progress) {
       shotSize: { width: 'all', height: 'all' }  
     }
     
-    Webshot(url + '?_escaped_fragment_=', 'screenshots' + path + '.png', options, function(err) {
-      if (err) console.error('(!) Cannot load url', path);
+    if (skip == 0) {
+      Webshot(url + '?_escaped_fragment_=', 'screenshots' + path + '.png', options, function(err) {
+        if (err) console.error('(!) Cannot load url', path);
+        _save(urls, progress);
+      });
+    }
+    else {
+      skip--;
       _save(urls, progress);
-    });
+    }
   }
 }
 

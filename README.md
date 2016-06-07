@@ -10,3 +10,10 @@ Allows you to easily check, how your JavaScript website will be shown for Google
 3. Download a `sitemap.xml` file into root folder of the project.
 4. Run the script `npm start` 
 5. Expect screenshots on `screenshots/` folder.
+
+
+## Arguments
+
+`npm start -- [skip]`
+
+- To skip first 42 urls `npm start -- 42`
