@@ -1,5 +1,8 @@
 # Sitemap Checker
 
+A small script which downloads every page from sitemap.xml as Google Crawler and save it as a screenshot.
+Allows you to easily check, how your JavaScript website will be shown for Google Crawler. 
+
 ## Usage
 
 1. Clone the project `git clone https://github.com/mrded/sitemapChecker.git`
